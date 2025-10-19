@@ -16,12 +16,11 @@
     .base {
         background-color: white;
         border-radius: 2%;
-    }
-    .card-container {
         text-align: center;
     }
     .deck {
         overflow-x: scroll;
+        overflow-y: hidden;
     }
     .card {
         background-color: black;
@@ -29,6 +28,7 @@
         display: inline-block;
         height: 25vh;
         width: auto;
+        z-index: 100;
     }
     .modal-open .modal { display: flex !important; height: 100vh; }
     .modal-open .modal .modal-dialog { margin: auto; }
@@ -40,25 +40,25 @@
     <div class="row vh-25">
         <div class="col-4">
         </div>
-        <div class="col-4 card-container base base-2">
+        <div class="col-4 base base-2">
         </div>
         <div class="col-4">
         </div>
     </div>
 
     <div class="row vh-25">
-        <div class="col-4 card-container base base-3">
+        <div class="col-4 base base-3">
         </div>
-        <div class="col-4 card-container mound">
+        <div class="col-4 mound text-center">
         </div>
-        <div class="col-4 card-container base base-1">
+        <div class="col-4 base base-1">
         </div>
     </div>
 
     <div class="row vh-25">
         <div class="col-4">
         </div>
-        <div class="col-4 card-container base base-0">
+        <div class="col-4 base base-0">
         </div>
         <div class="col-4">
         </div>
@@ -79,27 +79,27 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script>
     // https://www.showdownbot.com
-    const setBackground = (cls, card) => {
-    //   document.querySelector(`.${cls}`).style.backgroundImage = `url('imgs/2025/LAD/${card}')`;
+    const setCard = (cls, card) => {
       $(`.${cls}`).html(`<img class="card" src="imgs/2025/LAD/${card}" onclick="modal('${card}')">`);
     };
 
     const modal = (card) => {
-        console.log("modal", card);
-        $(".modal-img").attr("src", `imgs/2025/LAD/${card}`);
-        $(".modal").modal();
+      $(".modal-img").attr("src", `imgs/2025/LAD/${card}`);
+      $(".modal").modal();
     };
 
     const init = async () => {
       const data = await (await fetch("cards.json")).json();
-      setBackground('base-0', data.cards["2025"].LAD[1]);
-      setBackground('mound', data.cards["2025"].LAD[0]);
+      setCard('base-0', data.cards["2025"].LAD[1]);
+      setCard('mound', data.cards["2025"].LAD[0]);
       data.cards["2025"].LAD.forEach(card => {
         $(".deck").append(`<img class="card" src="imgs/2025/LAD/${card}" onclick="modal('${card}')">`);
       });
+      $(".card").draggable();
     };
 
     init();
