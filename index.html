@@ -6,21 +6,20 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚾</text></svg>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
   <style>
-    .container-fluid {
-        background-color: black;
-        height: 100
+    .container-fluid { background-color: black; }
+    .modal-open .modal { display: flex !important; height: 100vh; }
+    .modal-open .modal .modal-dialog { margin: auto; }
+    .modal-img { height: auto; width: 100%; }
+    .field {
+        background-image: url('imgs/infield.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 75vh;
     }
-    .vh-25 {
+    .cards {
         height: 25vh;
-    }
-    .base {
-        background-color: white;
-        border-radius: 2%;
-        text-align: center;
-    }
-    .deck {
-        overflow-x: scroll;
-        overflow-y: hidden;
+        /* overflow-x: scroll; */
     }
     .card {
         background-color: black;
@@ -28,46 +27,18 @@
         display: inline-block;
         height: 25vh;
         width: auto;
-        z-index: 100;
     }
-    .modal-open .modal { display: flex !important; height: 100vh; }
-    .modal-open .modal .modal-dialog { margin: auto; }
-    .modal-img { height: auto; width: 100%; }
   </style>
 </head>
 <body>
   <div class="container-fluid">
-    <div class="row vh-25">
-        <div class="col-4">
-        </div>
-        <div class="col-4 base base-2">
-        </div>
-        <div class="col-4">
+    <div class="row">
+        <div class="col-12 field">
         </div>
     </div>
 
-    <div class="row vh-25">
-        <div class="col-4 base base-3">
-        </div>
-        <div class="col-4 mound text-center">
-        </div>
-        <div class="col-4 base base-1">
-        </div>
-    </div>
-
-    <div class="row vh-25">
-        <div class="col-4">
-        </div>
-        <div class="col-4 base base-0">
-        </div>
-        <div class="col-4">
-        </div>
-    </div>
-
-    <div class="row vh-25">
-        <div class="col-12">
-            <div class="deck text-nowrap">
-            </div>
+    <div class="row">
+        <div class="col-12 cards text-nowrap align-items-center">
         </div>
     </div>
 
@@ -84,10 +55,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script>
     // https://www.showdownbot.com
-    const setCard = (cls, card) => {
-      $(`.${cls}`).html(`<img class="card" src="imgs/2025/LAD/${card}" onclick="modal('${card}')">`);
-    };
-
     const modal = (card) => {
       $(".modal-img").attr("src", `imgs/2025/LAD/${card}`);
       $(".modal").modal();
@@ -95,12 +62,15 @@
 
     const init = async () => {
       const data = await (await fetch("cards.json")).json();
-      setCard('base-0', data.cards["2025"].LAD[1]);
-      setCard('mound', data.cards["2025"].LAD[0]);
       data.cards["2025"].LAD.forEach(card => {
-        $(".deck").append(`<img class="card" src="imgs/2025/LAD/${card}" onclick="modal('${card}')">`);
+        $(".cards").append(`<img class="card" src="imgs/2025/LAD/${card}" onclick="modal('${card}')">`);
       });
-      $(".card").draggable();
+      $(".card").draggable({
+        helper: "original",
+        appendTo: ".container-fluid",
+        zIndex: 100,
+        scroll: false,
+      });
     };
 
     init();
