@@ -10,35 +10,64 @@
     .modal-open .modal { display: flex !important; height: 100vh; }
     .modal-open .modal .modal-dialog { margin: auto; }
     .modal-img { height: auto; width: 100%; }
+    .h-100 { height: 100%; }
+    .w-50 { width: 50%; }
+    .menu {
+        text-align: center;
+        height: 10vh;
+    }
     .field {
         background-image: url('imgs/infield.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        height: 75vh;
+        height: 90vh;
+        width: 100%;
     }
     .cards {
-        height: 25vh;
-        /* overflow-x: scroll; */
+        height: 90vh;
+        text-align: center;
+        overflow-y: scroll;
+        width: 100%;
     }
     .card {
         background-color: black;
         cursor: pointer;
         display: inline-block;
-        height: 25vh;
+        height: 30vh;
         width: auto;
+    }
+    .sortable {
+        list-style-type: none; margin: 0; padding: 0;
+    }
+    li {
+        display: inline-block;
     }
   </style>
 </head>
 <body>
   <div class="container-fluid">
-    <div class="row">
-        <div class="col-12 field">
-        </div>
+    <div class="field"></div>
+
+    <div class="home d-none">
+       <ul class="sortable cards cards-home"></ul>
     </div>
 
     <div class="row">
-        <div class="col-12 cards text-nowrap align-items-center">
+        <div class="col-4 menu">
+            <button type="button" class="btn btn-light h-100 w-50" onclick="show('home')">
+                HOME
+            </button>
+        </div>
+        <div class="col-4 menu">
+            <button type="button" class="btn btn-success h-100 w-50" onclick="show('field')">
+                FIELD
+            </button>
+        </div>
+        <div class="col-4 menu">
+            <button type="button" class="btn btn-dark h-100 w-50" onclick="show('away')">
+                AWAY
+            </button>
         </div>
     </div>
 
@@ -60,17 +89,17 @@
       $(".modal").modal();
     };
 
+    const show = (page) => {
+        ["field", "home", "away"].forEach(cls => $(`.${cls}`).addClass("d-none"));
+        $(`.${page}`).removeClass("d-none");
+    }
+
     const init = async () => {
       const data = await (await fetch("cards.json")).json();
       data.cards["2025"].LAD.forEach(card => {
-        $(".cards").append(`<img class="card" src="imgs/2025/LAD/${card}" onclick="modal('${card}')">`);
+        $(".cards-home").append(`<li><img class="card" src="imgs/2025/LAD/${card}" onclick="modal('${card}')"></li>`);
       });
-      $(".card").draggable({
-        helper: "original",
-        appendTo: ".container-fluid",
-        zIndex: 100,
-        scroll: false,
-      });
+      $(".cards").sortable();
     };
 
     init();
