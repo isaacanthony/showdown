@@ -1,30 +1,61 @@
 {
     "cards": {
         "2025": {
-            "LAD": [
-                "abanda.png",
-                "acall.png",
-                "apages.png",
-                "avesia.png",
-                "brortvedt.png",
-                "bsnell.png",
-                "btreinen.png",
-                "ckershaw.png",
-                "ffreeman.png",
-                "hkim.png",
-                "khernandez.png",
-                "mbetts.png",
-                "mmuncy.png",
-                "mrojas.png",
-                "rsasaki.png",
-                "sohtani0.png",
-                "sohtani1.png",
-                "tedman.png",
-                "tglasnow.png",
-                "thernandez.png",
-                "wsmith.png",
-                "yyamamoto.png"
-            ]
+            "LAD": {
+                "prefix": "imgs/2025/LAD",
+                "all": [
+                    "abanda",
+                    "acall",
+                    "apages",
+                    "avesia",
+                    "brortvedt",
+                    "bsnell",
+                    "btreinen",
+                    "ckershaw",
+                    "ffreeman",
+                    "hkim",
+                    "khernandez",
+                    "mbetts",
+                    "mmuncy",
+                    "mrojas",
+                    "rsasaki",
+                    "sohtani0",
+                    "sohtani1",
+                    "tedman",
+                    "tglasnow",
+                    "thernandez",
+                    "wsmith",
+                    "yyamamoto"
+                ],
+                "pitchers": [
+                    "bsnell",
+                    "ckershaw",
+                    "rsasaki",
+                    "sohtani1",
+                    "tglasnow",
+                    "yyamamoto",
+                    "abanda",
+                    "avesia",
+                    "btreinen"
+                ],
+                "lineup": [
+                    "sohtani0",
+                    "mbetts",
+                    "wsmith",
+                    "ffreeman",
+                    "tedman",
+                    "thernandez",
+                    "mmuncy",
+                    "khernandez",
+                    "apages"
+                ],
+                "bench": [
+                    "acall",
+                    "brortvedt",
+                    "hkim",
+                    "mrojas"
+                ]
+            }
         }
     }
 }

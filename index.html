@@ -11,9 +11,12 @@
     .modal-open .modal .modal-dialog { margin: auto; }
     .modal-img { height: auto; width: 100%; }
     .h-100 { height: 100%; }
+    .vh-95 { height: 95vh; }
     .w-50 { width: 50%; }
+    .w-100 { width: 100%; }
     .menu {
-        border-radius: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
         cursor: pointer;
         text-align: center;
         height: 5vh;
@@ -23,46 +26,51 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        height: 95vh;
-        width: 100%;
     }
-    .cards {
-        height: 95vh;
-        text-align: center;
-        overflow-y: scroll;
+    .card-row {
+        height: 25vh;
+        overflow-x: scroll;
         width: 100%;
     }
     .card {
         background-color: black;
         cursor: pointer;
-        display: inline-block;
         height: 25vh;
         width: auto;
     }
-    .sortable {
-        list-style-type: none; margin: 0; padding: 0;
+    ul.sortable {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
     }
-    li {
+    li.sortable {
         display: inline-block;
     }
   </style>
 </head>
 <body>
   <div class="container-fluid">
-    <div class="field"></div>
+    <div class="field vh-95 w-100"></div>
 
-    <div class="home d-none">
-       <ul class="sortable cards cards-home"></ul>
+    <div class="home vh-95 w-100 d-none">
+        <span class="lead text-light">Pitchers</span>
+        <ul class="sortable card-row home-pitchers"></ul>
+        <br>
+        <span class="lead text-light">Lineup</span>
+        <ul class="sortable card-row home-lineup"></ul>
+        <br>
+        <span class="lead text-light">Bench</span>
+        <ul class="sortable card-row home-bench"></ul>
     </div>
 
-    <div class="away d-none">
+    <div class="away vh-95 w-100 d-none">
        <ul class="sortable cards cards-away"></ul>
     </div>
 
     <div class="row">
-        <div class="col-4 menu bg-light" onclick="show('home')">HOME</div>
-        <div class="col-4 menu bg-success text-light" onclick="show('field')">FIELD</div>
-        <div class="col-4 menu bg-dark text-light" onclick="show('away')">AWAY</div>
+        <div class="col-4 menu bg-light" onclick="nav('home')">Home</div>
+        <div class="col-4 menu bg-success text-light" onclick="nav('field')">Field</div>
+        <div class="col-4 menu bg-dark text-light" onclick="nav('away')">Away</div>
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -79,21 +87,37 @@
   <script>
     // https://www.showdownbot.com
     const modal = (card) => {
-      $(".modal-img").attr("src", `imgs/2025/LAD/${card}`);
+      $(".modal-img").attr("src", `imgs/2025/LAD/${card}.png`);
       $(".modal").modal();
     };
 
-    const show = (page) => {
+    const nav = (page) => {
         ["field", "home", "away"].forEach(cls => $(`.${cls}`).addClass("d-none"));
         $(`.${page}`).removeClass("d-none");
     }
 
+    const showTeam = (side, team) => {
+      team.pitchers.forEach(card => {
+        $(`.${side}-pitchers`).append(`
+            <li class="sortable"><img class="card" src="${team.prefix}/${card}.png" onclick="modal('${card}')"></li>
+        `);
+      });
+      team.lineup.forEach(card => {
+        $(`.${side}-lineup`).append(`
+            <li class="sortable"><img class="card" src="${team.prefix}/${card}.png" onclick="modal('${card}')"></li>
+        `);
+      });
+      team.bench.forEach(card => {
+        $(`.${side}-bench`).append(`
+            <li class="sortable"><img class="card" src="${team.prefix}/${card}.png" onclick="modal('${card}')"></li>
+        `);
+      });
+    };
+
     const init = async () => {
       const data = await (await fetch("cards.json")).json();
-      data.cards["2025"].LAD.forEach(card => {
-        $(".cards-home").append(`<li><img class="card" src="imgs/2025/LAD/${card}" onclick="modal('${card}')"></li>`);
-      });
-      $(".cards").sortable();
+      showTeam("home", data.cards["2025"].LAD);
+      $("ul.sortable").sortable();
     };
 
     init();
