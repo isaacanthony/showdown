@@ -14,6 +14,7 @@
     .vh-95 { height: 95vh; }
     .w-50 { width: 50%; }
     .w-100 { width: 100%; }
+    .overflow-x-scroll { overflow-x: scroll; overflow-y: hidden; }
     .menu {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
@@ -26,12 +27,6 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-    }
-    .card-row {
-        height: 27vh;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        width: 100%;
     }
     .card {
         background-color: black;
@@ -54,21 +49,33 @@
     <div class="field vh-95 w-100"></div>
 
     <div class="home vh-95 w-100 d-none">
-        <span class="lead text-light">Pitchers</span>
-        <ul class="sortable card-row text-nowrap home-pitchers"></ul>
-        <span class="lead text-light">Lineup</span>
-        <ul class="sortable card-row text-nowrap home-lineup"></ul>
-        <span class="lead text-light">Bench</span>
-        <ul class="sortable card-row text-nowrap home-bench"></ul>
+        <div class="w-100 overflow-x-scroll">
+            <span class="lead text-light">Pitchers</span>
+            <ul class="sortable text-nowrap home-pitchers"></ul>
+        </div>
+        <div class="w-100 overflow-x-scroll">
+            <span class="lead text-light">Lineup</span>
+            <ul class="sortable text-nowrap home-lineup"></ul>
+        </div>
+        <div class="w-100 overflow-x-scroll">
+            <span class="lead text-light">Bench</span>
+            <ul class="sortable text-nowrap home-bench"></ul>
+        </div>
     </div>
 
     <div class="away vh-95 w-100 d-none">
-        <span class="lead text-light">Pitchers</span>
-        <ul class="sortable card-row text-nowrap away-pitchers"></ul>
-        <span class="lead text-light">Lineup</span>
-        <ul class="sortable card-row text-nowrap away-lineup"></ul>
-        <span class="lead text-light">Bench</span>
-        <ul class="sortable card-row text-nowrap away-bench"></ul>
+        <div class="w-100 overflow-x-scroll">
+            <span class="lead text-light">Pitchers</span>
+            <ul class="sortable text-nowrap away-pitchers"></ul>
+        </div>
+        <div class="w-100 overflow-x-scroll">
+            <span class="lead text-light">Lineup</span>
+            <ul class="sortable text-nowrap away-lineup"></ul>
+        </div>
+        <div class="w-100 overflow-x-scroll">
+            <span class="lead text-light">Bench</span>
+            <ul class="sortable text-nowrap away-bench"></ul>
+        </div>
     </div>
 
     <div class="row">
