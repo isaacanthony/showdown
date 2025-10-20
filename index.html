@@ -13,19 +13,21 @@
     .h-100 { height: 100%; }
     .w-50 { width: 50%; }
     .menu {
+        border-radius: 5px;
+        cursor: pointer;
         text-align: center;
-        height: 10vh;
+        height: 5vh;
     }
     .field {
         background-image: url('imgs/infield.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        height: 90vh;
+        height: 95vh;
         width: 100%;
     }
     .cards {
-        height: 90vh;
+        height: 95vh;
         text-align: center;
         overflow-y: scroll;
         width: 100%;
@@ -34,7 +36,7 @@
         background-color: black;
         cursor: pointer;
         display: inline-block;
-        height: 30vh;
+        height: 25vh;
         width: auto;
     }
     .sortable {
@@ -53,22 +55,14 @@
        <ul class="sortable cards cards-home"></ul>
     </div>
 
+    <div class="away d-none">
+       <ul class="sortable cards cards-away"></ul>
+    </div>
+
     <div class="row">
-        <div class="col-4 menu">
-            <button type="button" class="btn btn-light h-100 w-50" onclick="show('home')">
-                HOME
-            </button>
-        </div>
-        <div class="col-4 menu">
-            <button type="button" class="btn btn-success h-100 w-50" onclick="show('field')">
-                FIELD
-            </button>
-        </div>
-        <div class="col-4 menu">
-            <button type="button" class="btn btn-dark h-100 w-50" onclick="show('away')">
-                AWAY
-            </button>
-        </div>
+        <div class="col-4 menu bg-light" onclick="show('home')">HOME</div>
+        <div class="col-4 menu bg-success text-light" onclick="show('field')">FIELD</div>
+        <div class="col-4 menu bg-dark text-light" onclick="show('away')">AWAY</div>
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
