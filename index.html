@@ -28,8 +28,9 @@
         background-position: center;
     }
     .card-row {
-        height: 25vh;
+        height: 27vh;
         overflow-x: scroll;
+        overflow-y: hidden;
         width: 100%;
     }
     .card {
@@ -54,17 +55,20 @@
 
     <div class="home vh-95 w-100 d-none">
         <span class="lead text-light">Pitchers</span>
-        <ul class="sortable card-row home-pitchers text-nowrap"></ul>
-        <br>
+        <ul class="sortable card-row text-nowrap home-pitchers"></ul>
         <span class="lead text-light">Lineup</span>
-        <ul class="sortable card-row home-lineup text-nowrap"></ul>
-        <br>
+        <ul class="sortable card-row text-nowrap home-lineup"></ul>
         <span class="lead text-light">Bench</span>
-        <ul class="sortable card-row home-bench text-nowrap"></ul>
+        <ul class="sortable card-row text-nowrap home-bench"></ul>
     </div>
 
     <div class="away vh-95 w-100 d-none">
-       <ul class="sortable cards cards-away"></ul>
+        <span class="lead text-light">Pitchers</span>
+        <ul class="sortable card-row text-nowrap away-pitchers"></ul>
+        <span class="lead text-light">Lineup</span>
+        <ul class="sortable card-row text-nowrap away-lineup"></ul>
+        <span class="lead text-light">Bench</span>
+        <ul class="sortable card-row text-nowrap away-bench"></ul>
     </div>
 
     <div class="row">
@@ -117,6 +121,7 @@
     const init = async () => {
       const data = await (await fetch("cards.json")).json();
       showTeam("home", data.cards["2025"].LAD);
+      showTeam("away", data.cards["2025"].LAD);
       $("ul.sortable").sortable();
     };
 
