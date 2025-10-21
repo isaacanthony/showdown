@@ -6,13 +6,14 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚾</text></svg>">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
   <style>
-    .container-fluid { background-color: black; }
+    .bg-black { background-color: black; }
     .modal-open .modal { display: flex !important; height: 100vh; }
     .modal-open .modal .modal-dialog { margin: auto; }
-    .modal-img { height: auto; width: 100%; }
+    .modal-img { border-radius: 2%; height: auto; width: 100%; }
     .h-100 { height: 100%; }
     .vh-10 { height: 10vh; }
     .vh-90 { height: 90vh; }
+    .w-30 { width: 30%; }
     .w-50 { width: 50%; }
     .w-95 { width: 95%; }
     .w-100 { width: 100%; }
@@ -32,6 +33,7 @@
     }
     .card {
         background-color: black;
+        border-radius: 2%;
         cursor: pointer;
         height: 25vh;
         width: auto;
@@ -47,7 +49,7 @@
   </style>
 </head>
 <body>
-  <div class="container-fluid overflow-y-hidden">
+  <div class="container-fluid bg-black overflow-y-hidden">
     <div class="field vh-90 w-100"></div>
 
     <div class="home vh-90 w-100 d-none">
@@ -491,7 +493,25 @@
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
-            <img class="modal-img">
+          <div class="modal-content bg-black">
+            <div class="modal-header">
+              <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img class="modal-img">
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn btn-light w-30 modal-left">&lt;&lt;</button>
+              <div class="modal-action-wrapper w-30">
+                <button type="button" class="btn btn-success w-100" data-dismiss="modal">
+                  <span class="modal-action"></span>
+                </button>
+              </div>
+              <button type="button" class="btn btn-light w-30 modal-right">&gt;&gt;</button>
+            </div>
+          </div>
         </div>
     </div>
   </div>
@@ -501,11 +521,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script>
-    // https://www.showdownbot.com
+    // https://www.showdownbot.
+    let data = {};
     let currentPage = "field";
 
-    const modal = (card) => {
-      $(".modal-img").attr("src", `imgs/2025/LAD/${card}.png`);
+    const modal = (year, teamName, position, index) => {
+      const team = data.cards[year][teamName];
+      $(".modal-img").attr("src", `${team.prefix}/${team[position][index]}.png`);
+      $(".modal-action-wrapper").removeClass("d-none");
+      if (position === "bench") $(".modal-action-wrapper").addClass("d-none");
+      $(".modal-action").html({"pitchers": "Pitch", "lineup": "Bat"}[position]);
+      $(".modal-left").off("click");
+      $(".modal-left").on("click", () => {
+        modal(year, teamName, position,  (index - 1) >= 0 ? (index - 1) : (team[position].length - 1));
+      });
+      $(".modal-right").off("click");
+      $(".modal-right").on("click", () => {
+        modal(year, teamName, position, (index + 1) % team[position].length);
+      });
       $(".modal").modal();
     };
 
@@ -530,20 +563,40 @@
       }
     }
 
-    const showTeam = (side, team) => {
-      team.pitchers.forEach(card => {
+    const showTeam = (side, year, teamName) => {
+      const team = data["cards"][year][teamName];
+
+      team.pitchers.forEach((card, index) => {
         $(`.${side}-pitchers`).append(`
-            <li class="sortable"><img class="card" src="${team.prefix}/${card}.png" onclick="modal('${card}')"></li>
+            <li class="sortable">
+              <img
+                class="card" src="${team.prefix}/${card}.png"
+                onclick="modal('${year}', '${teamName}', 'pitchers', ${index})"
+              >
+            </li>
         `);
       });
-      team.lineup.forEach(card => {
+
+      team.lineup.forEach((card, index) => {
         $(`.${side}-lineup`).append(`
-            <li class="sortable"><img class="card" src="${team.prefix}/${card}.png" onclick="modal('${card}')"></li>
+            <li class="sortable">
+              <img
+                class="card" src="${team.prefix}/${card}.png"
+                onclick="modal('${year}', '${teamName}', 'lineup', ${index})"
+              >
+            </li>
         `);
       });
-      team.bench.forEach(card => {
+
+      team.bench.forEach((card, index) => {
         $(`.${side}-bench`).append(`
-            <li class="sortable"><img class="card" src="${team.prefix}/${card}.png" onclick="modal('${card}')"></li>
+            <li class="sortable">
+              <img
+                class="card"
+                src="${team.prefix}/${card}.png"
+                onclick="modal('${year}', '${teamName}', 'bench', ${index})"
+              >
+            </li>
         `);
       });
     };
@@ -555,9 +608,9 @@
     };
 
     const init = async () => {
-      const data = await (await fetch("data.json")).json();
-      showTeam("home", data.cards["2025"].LAD);
-      showTeam("away", data.cards["2025"].LAD);
+      data = await (await fetch("data.json")).json();
+      showTeam("home", "2025", "LAD");
+      showTeam("away", "2025", "LAD");
       $("ul.sortable").sortable();
     };
 
