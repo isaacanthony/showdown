@@ -11,7 +11,8 @@
     .modal-open .modal .modal-dialog { margin: auto; }
     .modal-img { height: auto; width: 100%; }
     .h-100 { height: 100%; }
-    .vh-95 { height: 95vh; }
+    .vh-10 { height: 10vh; }
+    .vh-90 { height: 90vh; }
     .w-50 { width: 50%; }
     .w-95 { width: 95%; }
     .w-100 { width: 100%; }
@@ -32,7 +33,7 @@
     .card {
         background-color: black;
         cursor: pointer;
-        height: 25vh;
+        height: 24vh;
         width: auto;
     }
     ul.sortable {
@@ -47,39 +48,39 @@
 </head>
 <body>
   <div class="container-fluid overflow-y-hidden">
-    <div class="field vh-95 w-100"></div>
+    <div class="field vh-90 w-100"></div>
 
-    <div class="home vh-95 w-100 d-none">
+    <div class="home vh-90 w-100 d-none">
         <div class="w-100 overflow-x-scroll">
             <ul class="sortable text-nowrap home-pitchers"></ul>
-            <span class="lead text-light">Pitchers</span>
+            <span class="text-light">Pitchers</span>
         </div>
         <div class="w-100 overflow-x-scroll">
             <ul class="sortable text-nowrap home-lineup"></ul>
-            <span class="lead text-light">Lineup</span>
+            <span class="text-light">Lineup</span>
         </div>
         <div class="w-100 overflow-x-scroll">
             <ul class="sortable text-nowrap home-bench"></ul>
-            <span class="lead text-light">Bench</span>
+            <span class="text-light">Bench</span>
         </div>
     </div>
 
-    <div class="away vh-95 w-100 d-none">
+    <div class="away vh-90 w-100 d-none">
         <div class="w-100 overflow-x-scroll">
             <ul class="sortable text-nowrap away-pitchers"></ul>
-            <span class="lead text-light">Pitchers</span>
+            <span class="text-light">Pitchers</span>
         </div>
         <div class="w-100 overflow-x-scroll">
             <ul class="sortable text-nowrap away-lineup"></ul>
-            <span class="lead text-light">Lineup</span>
+            <span class="text-light">Lineup</span>
         </div>
         <div class="w-100 overflow-x-scroll">
             <ul class="sortable text-nowrap away-bench"></ul>
-            <span class="lead text-light">Bench</span>
+            <span class="text-light">Bench</span>
         </div>
     </div>
 
-    <div class="score vh-95 w-100 text-light d-none">
+    <div class="score vh-90 w-100 text-light d-none">
       <div class="row">
         <div class="col-12">
 
@@ -464,7 +465,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row vh-10">
         <div class="col-4 menu">
           <button class="btn btn-light w-95" onclick="nav('home')">
             <span class="btn-home-up">▲</span>
