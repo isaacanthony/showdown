@@ -13,11 +13,12 @@
     .h-100 { height: 100%; }
     .vh-95 { height: 95vh; }
     .w-50 { width: 50%; }
+    .w-95 { width: 95%; }
     .w-100 { width: 100%; }
     .overflow-x-scroll { overflow-x: scroll; overflow-y: hidden; }
+    .overflow-y-hidden { overflow-y: hidden; }
     .menu {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
+        background-color: black;
         cursor: pointer;
         text-align: center;
         height: 5vh;
@@ -45,7 +46,7 @@
   </style>
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid overflow-y-hidden">
     <div class="field vh-95 w-100"></div>
 
     <div class="home vh-95 w-100 d-none">
@@ -78,10 +79,413 @@
         </div>
     </div>
 
+    <div class="score vh-95 w-100 text-light d-none">
+      <div class="row">
+        <div class="col-12">
+
+          <div class="row mt-5 pt-5 mb-5">
+            <div class="col-12 text-center">
+              <h1 class="display-4">
+                <small class="text-muted">Home</small>
+                <span class="score-home">0</span>
+                &nbsp;<span class="text-muted">&bull;</span>&nbsp;
+                <span class="score-away">0</span>
+                <small class="text-muted">Away</small>
+              </h1>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-dark table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Inning</th>
+                  <th scope="col">1</th>
+                  <th scope="col">2</th>
+                  <th scope="col">3</th>
+                  <th scope="col">4</th>
+                  <th scope="col">5</th>
+                  <th scope="col">6</th>
+                  <th scope="col">7</th>
+                  <th scope="col">8</th>
+                  <th scope="col">9</th>
+                  <th scope="col">Extra</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Home</th>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-home" onchange="calculateScore('home')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Away</th>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="select-score-away" onchange="calculateScore('away')">
+                      <option value="0" selected></option>
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-12 text-center">
+              Outs&nbsp;&nbsp;&nbsp;
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="outs" id="outs-0" class="custom-control-input" checked>
+                <label class="custom-control-label" for="outs-0">0&nbsp;&nbsp;&nbsp;</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="outs" id="outs-1" class="custom-control-input">
+                <label class="custom-control-label" for="outs-1">1&nbsp;&nbsp;&nbsp;</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" name="outs" id="outs-2" class="custom-control-input">
+                <label class="custom-control-label" for="outs-2">2&nbsp;&nbsp;&nbsp;</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
-        <div class="col-4 menu bg-light" onclick="nav('home')">Home</div>
-        <div class="col-4 menu bg-success text-light" onclick="nav('field')">Field</div>
-        <div class="col-4 menu bg-dark text-light" onclick="nav('away')">Away</div>
+        <div class="col-4 menu">
+          <button class="btn btn-light w-95" onclick="nav('home')">
+            <span class="btn-home-up">▲</span>
+            <span class="btn-home-down d-none">▼</span>
+            Home
+          </button>
+        </div>
+        <div class="col-4 menu">
+          <button class="btn btn-success w-95" onclick="nav('score')">
+            <span class="btn-score-up">▲</span>
+            <span class="btn-score-down d-none">▼</span>
+            Score
+          </button>
+        </div>
+        <div class="col-4 menu">
+          <button class="btn btn-dark w-95" onclick="nav('away')">
+            <span class="btn-away-up">▲</span>
+            <span class="btn-away-down d-none">▼</span>
+            Away
+          </button>
+        </div>
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -97,14 +501,32 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script>
     // https://www.showdownbot.com
+    let currentPage = "field";
+
     const modal = (card) => {
       $(".modal-img").attr("src", `imgs/2025/LAD/${card}.png`);
       $(".modal").modal();
     };
 
-    const nav = (page) => {
-        ["field", "home", "away"].forEach(cls => $(`.${cls}`).addClass("d-none"));
-        $(`.${page}`).removeClass("d-none");
+    const nav = (newPage) => {
+      // Reset pages.
+      ["home", "score", "away"].forEach((cls) => {
+        $(`.${cls}`).addClass("d-none");
+        $(`.btn-${cls}-up`).removeClass("d-none");
+        $(`.btn-${cls}-down`).addClass("d-none");
+      });
+
+      // Toggle current page.
+      if (currentPage !== newPage) {
+        $(`.${newPage}`).removeClass("d-none");
+        $(`.btn-${newPage}-up`).addClass("d-none");
+        $(`.btn-${newPage}-down`).removeClass("d-none");
+        $(".field").addClass("d-none");
+        currentPage = newPage;
+      } else {
+        $(".field").removeClass("d-none");
+        currentPage = "field";
+      }
     }
 
     const showTeam = (side, team) => {
@@ -125,14 +547,20 @@
       });
     };
 
+    const calculateScore = (team) => {
+      let score = 0;
+      $(`.select-score-${team}`).each((_, el) => score += Number($(el).val()));
+      $(`.score-${team}`).text(score);
+    };
+
     const init = async () => {
-      const data = await (await fetch("cards.json")).json();
+      const data = await (await fetch("data.json")).json();
       showTeam("home", data.cards["2025"].LAD);
       showTeam("away", data.cards["2025"].LAD);
       $("ul.sortable").sortable();
     };
 
-    init();
+    $(document).ready(init);
   </script>
 </body>
 </html>
