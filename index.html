@@ -24,12 +24,6 @@
     .w-100 { width: 100%; }
     .overflow-x-scroll { overflow-x: scroll; overflow-y: hidden; }
     .overflow-y-hidden { overflow-y: hidden; }
-    .menu {
-        background-color: black;
-        cursor: pointer;
-        text-align: center;
-        height: 5vh;
-    }
     .field {
         background: transparent;
         z-index: 0;
@@ -62,7 +56,7 @@
       background-image: url('imgs/infield.png');
       background-size: contain;
       background-repeat: no-repeat;
-      background-position: center;
+      background-position: center 3vh;
     }
   </style>
 </head>
@@ -467,22 +461,22 @@
     </div>
 
     <div class="row vh-10">
-        <div class="col-3 menu">
+        <div class="col-3">
           <button class="btn btn-sm btn-light w-100" onclick="nav('home')">
             <span class="btn-home-up">▲</span><span class="btn-home-down d-none">▼</span>Home
           </button>
         </div>
-        <div class="col-3 menu">
+        <div class="col-3">
           <button class="btn btn-sm btn-light w-100" onclick="nav('score')">
             <span class="btn-score-up">▲</span><span class="btn-score-down d-none">▼</span>Score
           </button>
         </div>
-        <div class="col-3 menu">
+        <div class="col-3">
           <button class="btn btn-sm btn-light w-100" onclick="rollDice()">
             Roll<span class="btn-roll-value"></span>
           </button>
         </div>
-        <div class="col-3 menu">
+        <div class="col-3">
           <button class="btn btn-sm btn-light w-100" onclick="nav('away')">
             <span class="btn-away-up">▲</span><span class="btn-away-down d-none">▼</span>Away
           </button>
