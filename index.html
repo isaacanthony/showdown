@@ -15,12 +15,11 @@
     .modal-header { padding: 0.5rem 0.75rem; }
     .modal-img { border-radius: 2%; height: auto; width: 100%; }
     .h-100 { height: 100%; }
-    .vh-10 { height: 10vh; }
-    .vh-90 { height: 90vh; }
+    .vh-10 { height: 7vh; }
+    .vh-90 { height: 93vh; }
     .vh-100 { height: 100vh; }
     .w-30 { width: 30%; }
     .w-50 { width: 50%; }
-    .w-95 { width: 95%; }
     .w-100 { width: 100%; }
     .overflow-x-scroll { overflow-x: scroll; overflow-y: hidden; }
     .overflow-y-hidden { overflow-y: hidden; }
@@ -31,10 +30,6 @@
         height: 5vh;
     }
     .field {
-        /* background-image: url('imgs/infield.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center; */
         background: transparent;
         z-index: 0;
         position: relative;
@@ -491,22 +486,27 @@
     </div>
 
     <div class="row vh-10">
-        <div class="col-4 menu">
-          <button class="btn btn-light w-95" onclick="nav('home')">
+        <div class="col-3 menu">
+          <button class="btn btn-sm btn-light w-100" onclick="nav('home')">
             <span class="btn-home-up">▲</span>
             <span class="btn-home-down d-none">▼</span>
             Home
           </button>
         </div>
-        <div class="col-4 menu">
-          <button class="btn btn-light w-95" onclick="nav('score')">
+        <div class="col-3 menu">
+          <button class="btn btn-sm btn-light w-100" onclick="nav('score')">
             <span class="btn-score-up">▲</span>
             <span class="btn-score-down d-none">▼</span>
             Score
           </button>
         </div>
-        <div class="col-4 menu">
-          <button class="btn btn-light w-95" onclick="nav('away')">
+        <div class="col-3 menu">
+          <button class="btn btn-sm btn-light w-100" onclick="rollDice()">
+            Roll<span class="btn-roll-value"></span>
+          </button>
+        </div>
+        <div class="col-3 menu">
+          <button class="btn btn-sm btn-light w-100" onclick="nav('away')">
             <span class="btn-away-up">▲</span>
             <span class="btn-away-down d-none">▼</span>
             Away
@@ -554,6 +554,8 @@
     // https://www.showdownbot.
     let data = {};
     let currentPage = "field";
+    let dice;
+    let isRolling = false;
 
     const modal = (year, teamName, position, index) => {
       const team = data.cards[year][teamName];
@@ -637,15 +639,30 @@
       $(`.score-${team}`).text(score);
     };
 
+    const rollDice = () => {
+      if (isRolling) return;
+      isRolling = true;
+      nav(currentPage);
+      const vector = { x: (Math.random() * 2 - 1) * dice.w, y: -(Math.random() * 2 - 1) * dice.h };
+      const dist = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+      const boost = (Math.random() + 3) * dist;
+      const beforeRoll = (_) => {
+        $(".btn-roll-value").empty();
+      };
+      const afterRoll = (notation) => {
+        $(".btn-roll-value").html(`: ${notation.resultString}`);
+        isRolling = false;
+      };
+      dice.throw_dices(vector, boost, dist, beforeRoll, afterRoll);
+    };
+
     const init = async () => {
       data = await (await fetch("data.json")).json();
       showTeam("home", "2025", "LAD");
       showTeam("away", "2025", "LAD");
       $("ul.sortable").sortable();
-      const box = new DICE.dice_box(document.querySelector(".dice-container"));
-      box.bind_swipe(document.querySelector(".field"), console.log, console.log);
-      box.setDice("1d20");
-      box.start_throw();
+      dice = new DICE.dice_box(document.querySelector(".dice-container"));
+      dice.setDice("1d20");
     };
 
     $(document).ready(init);

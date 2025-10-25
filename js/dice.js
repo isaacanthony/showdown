@@ -218,6 +218,10 @@ const DICE = (function() {
         });
     }
 
+    that.dice_box.prototype.throw_dices = function(vector, boost, dist, before_roll, after_roll) {
+        return throw_dices(this, vector, boost, dist, before_roll, after_roll);
+    }
+
     function throw_dices(box, vector, boost, dist, before_roll, after_roll) {
         var uat = vars.use_adapvite_timestep;
 
