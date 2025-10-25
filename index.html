@@ -17,6 +17,8 @@
     .modal-img { border-radius: 2%; height: auto; width: 100%; }
     .h-100 { height: 100%; }
     .vh-10 { height: 7vh; }
+    .vh-20 { height: 20vh; }
+    .vh-70 { height: 73vh; }
     .vh-90 { height: 93vh; }
     .vh-100 { height: 100vh; }
     .w-30 { width: 30%; }
@@ -24,10 +26,11 @@
     .w-100 { width: 100%; }
     .overflow-x-scroll { overflow-x: scroll; overflow-y: hidden; }
     .overflow-y-hidden { overflow-y: hidden; }
-    .field {
-        background: transparent;
-        z-index: 0;
-        position: relative;
+    .field-bg {
+      background-image: url('imgs/infield.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
     }
     .card {
         background-color: black;
@@ -46,25 +49,23 @@
     }
     .dice-container {
       position: absolute;
-      top: 0;
-      height: 100vh;
+      top: 73vh;
+      height: 20vh;
       width: 100vw;
-      z-index: -1;
+      z-index: 1;
       overflow: hidden;
-    }
-    canvas {
-      background-image: url('imgs/infield.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center 3vh;
     }
   </style>
 </head>
 <body>
-  <div class="dice-container bg-black"></div>
-  <div class="field vh-90 w-100"></div>  
+  <div class="field dice-container"></div>
 
   <div class="container-fluid bg-black overflow-y-hidden">
+    <div class="field vh-90 w-100 bg-transparent">
+      <div class="field-bg vh-70 w-100"></div>
+      <div class="vh-20 w-100 bg-transparent"></div>
+    </div>
+
     <div class="home vh-90 w-100 d-none">
         <div class="w-100 overflow-x-scroll">
             <ul class="sortable text-nowrap home-pitchers"></ul>
