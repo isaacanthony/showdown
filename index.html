@@ -633,6 +633,7 @@
 
     const init = async () => {
       data = await (await fetch("data.json")).json();
+      $("body").on("click", (e) => e.preventDefault());
       showTeam("home", "2025", "LAD");
       showTeam("away", "2025", "LAD");
       $("ul.sortable").sortable();
