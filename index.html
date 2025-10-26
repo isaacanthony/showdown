@@ -26,17 +26,26 @@
     .w-100 { width: 100%; }
     .overflow-x-scroll { overflow-x: scroll; overflow-y: hidden; }
     .overflow-y-hidden { overflow-y: hidden; }
+    .float-left { float: left; }
+    .float-right { float: right; }
     .field-bg {
-      background-image: url('imgs/infield.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+        background-image: url('imgs/infield.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
     .card {
         background-color: black;
         border-radius: 2%;
         cursor: pointer;
         height: 25vh;
+        width: auto;
+    }
+    .draggable-card {
+        background-color: black;
+        border-radius: 2%;
+        cursor: pointer;
+        height: 20vh;
         width: auto;
     }
     ul.sortable {
@@ -498,8 +507,8 @@
             <div class="modal-footer border-0 d-flex justify-content-center">
               <button type="button" class="btn btn-light w-30 modal-left">&lt;&lt;</button>
               <div class="modal-action-wrapper w-30">
-                <button type="button" class="btn btn-success w-100" data-dismiss="modal">
-                  <span class="modal-action"></span>
+                <button type="button" class="btn btn-light w-100" data-dismiss="modal">
+                  <span class="modal-action">To Field</span>
                 </button>
               </div>
               <button type="button" class="btn btn-light w-30 modal-right">&gt;&gt;</button>
@@ -527,23 +536,6 @@
     let dice;
     let isRolling = false;
 
-    const modal = (year, teamName, position, index) => {
-      const team = data.cards[year][teamName];
-      $(".modal-img").attr("src", `${team.prefix}/${team[position][index]}.png`);
-      $(".modal-action-wrapper").removeClass("d-none");
-      if (position === "bench") $(".modal-action-wrapper").addClass("d-none");
-      $(".modal-action").html({"pitchers": "Pitch", "lineup": "Bat"}[position]);
-      $(".modal-left").off("click");
-      $(".modal-left").on("click", () => {
-        modal(year, teamName, position,  (index - 1) >= 0 ? (index - 1) : (team[position].length - 1));
-      });
-      $(".modal-right").off("click");
-      $(".modal-right").on("click", () => {
-        modal(year, teamName, position, (index + 1) % team[position].length);
-      });
-      $(".modal").modal();
-    };
-
     const nav = (newPage) => {
       // Reset pages.
       ["home", "score", "away"].forEach((cls) => {
@@ -565,6 +557,33 @@
       }
     }
 
+    const toField = (side, card) => {
+      const floatDir = side === "home" ? "left" : "right";
+      $(".field-bg").append(`<img class="draggable-card float-${floatDir}" src="${card}">`);
+      $(".draggable-card").draggable();
+      nav(currentPage);
+    };
+
+    const modal = (side, year, teamName, position, index) => {
+      const team = data.cards[year][teamName];
+      $(".modal-img").attr("src", `${team.prefix}/${team[position][index]}.png`);
+      $(".modal-action-wrapper").removeClass("d-none");
+      if (position === "bench") $(".modal-action-wrapper").addClass("d-none");
+      $(".modal-action").off("click");
+      $(".modal-action").on("click", () => {
+        toField(side, `${team.prefix}/${team[position][index]}.png`);
+      });
+      $(".modal-left").off("click");
+      $(".modal-left").on("click", () => {
+        modal(side, year, teamName, position,  (index - 1) >= 0 ? (index - 1) : (team[position].length - 1));
+      });
+      $(".modal-right").off("click");
+      $(".modal-right").on("click", () => {
+        modal(side, year, teamName, position, (index + 1) % team[position].length);
+      });
+      $(".modal").modal();
+    };
+
     const showTeam = (side, year, teamName) => {
       const team = data["cards"][year][teamName];
 
@@ -573,7 +592,7 @@
           <li class="sortable">
             <img
               class="card" src="${team.prefix}/${card}.png"
-              onclick="modal('${year}', '${teamName}', 'pitchers', ${index})"
+              onclick="modal('${side}', '${year}', '${teamName}', 'pitchers', ${index})"
             >
           </li>
         `);
@@ -584,7 +603,7 @@
           <li class="sortable">
             <img
               class="card" src="${team.prefix}/${card}.png"
-              onclick="modal('${year}', '${teamName}', 'lineup', ${index})"
+              onclick="modal('${side}', '${year}', '${teamName}', 'lineup', ${index})"
             >
           </li>
         `);
@@ -596,7 +615,7 @@
             <img
               class="card"
               src="${team.prefix}/${card}.png"
-              onclick="modal('${year}', '${teamName}', 'bench', ${index})"
+              onclick="modal('${side}', '${year}', '${teamName}', 'bench', ${index})"
             >
           </li>
         `);
