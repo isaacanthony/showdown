@@ -508,7 +508,7 @@
               <button type="button" class="btn btn-light w-30 modal-left">&lt;&lt;</button>
               <div class="modal-action-wrapper w-30">
                 <button type="button" class="btn btn-light w-100" data-dismiss="modal">
-                  <span class="modal-action">To Field</span>
+                  <span class="modal-action"></span>
                 </button>
               </div>
               <button type="button" class="btn btn-light w-30 modal-right">&gt;&gt;</button>
@@ -557,9 +557,17 @@
       }
     }
 
-    const toField = (side, card) => {
+    const toField = (side, src) => {
+      const cardId = `card-${Math.round(Math.random() * 10 ** 10)}`;
       const floatDir = side === "home" ? "left" : "right";
-      $(".field-bg").append(`<img class="draggable-card float-${floatDir}" src="${card}">`);
+      $(".field-bg").append(`
+        <img
+          id="${cardId}"
+          class="draggable-card float-${floatDir}"
+          src="${src}"
+          onclick="modalField('${cardId}', '${src}')"
+        >
+      `);
       $(".draggable-card").draggable();
       nav(currentPage);
     };
@@ -573,14 +581,28 @@
       $(".modal-action").on("click", () => {
         toField(side, `${team.prefix}/${team[position][index]}.png`);
       });
+      $(".modal-action").html("To Field");
       $(".modal-left").off("click");
       $(".modal-left").on("click", () => {
         modal(side, year, teamName, position,  (index - 1) >= 0 ? (index - 1) : (team[position].length - 1));
       });
+      $(".modal-left").removeClass("d-none");
       $(".modal-right").off("click");
       $(".modal-right").on("click", () => {
         modal(side, year, teamName, position, (index + 1) % team[position].length);
       });
+      $(".modal-right").removeClass("d-none");
+      $(".modal").modal();
+    };
+
+    const modalField = (id, src) => {
+      $(".modal-img").attr("src", src);
+      $(".modal-action-wrapper").removeClass("d-none");
+      $(".modal-left").addClass("d-none");
+      $(".modal-right").addClass("d-none");
+      $(".modal-action").html("To Bench");
+      $(".modal-action").off("click");
+      $(".modal-action").on("click", () => $(`#${id}`).remove());
       $(".modal").modal();
     };
 
