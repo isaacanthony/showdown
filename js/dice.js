@@ -40,8 +40,8 @@ const DICE = (function() {
         dice_color: '#202020',
         ambient_light_color: 0xf0f0f0,
         spot_light_color: 0xefefef,
-        desk_color: '#101010', //canvas background
-        desk_opacity: 0.5,
+        desk_color: '#000000', //canvas background
+        desk_opacity: 1.0,
         use_shadows: true,
         use_adapvite_timestep: true //todo: setting this to false improves performace a lot. but the dice rolls don't look as natural...
 

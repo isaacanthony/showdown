@@ -570,35 +570,35 @@
 
       team.pitchers.forEach((card, index) => {
         $(`.${side}-pitchers`).append(`
-            <li class="sortable">
-              <img
-                class="card" src="${team.prefix}/${card}.png"
-                onclick="modal('${year}', '${teamName}', 'pitchers', ${index})"
-              >
-            </li>
+          <li class="sortable">
+            <img
+              class="card" src="${team.prefix}/${card}.png"
+              onclick="modal('${year}', '${teamName}', 'pitchers', ${index})"
+            >
+          </li>
         `);
       });
 
       team.lineup.forEach((card, index) => {
         $(`.${side}-lineup`).append(`
-            <li class="sortable">
-              <img
-                class="card" src="${team.prefix}/${card}.png"
-                onclick="modal('${year}', '${teamName}', 'lineup', ${index})"
-              >
-            </li>
+          <li class="sortable">
+            <img
+              class="card" src="${team.prefix}/${card}.png"
+              onclick="modal('${year}', '${teamName}', 'lineup', ${index})"
+            >
+          </li>
         `);
       });
 
       team.bench.forEach((card, index) => {
         $(`.${side}-bench`).append(`
-            <li class="sortable">
-              <img
-                class="card"
-                src="${team.prefix}/${card}.png"
-                onclick="modal('${year}', '${teamName}', 'bench', ${index})"
-              >
-            </li>
+          <li class="sortable">
+            <img
+              class="card"
+              src="${team.prefix}/${card}.png"
+              onclick="modal('${year}', '${teamName}', 'bench', ${index})"
+            >
+          </li>
         `);
       });
     };
@@ -613,9 +613,9 @@
       if (isRolling) return;
       isRolling = true;
       nav(currentPage);
-      const vector = { x: (Math.random() * 2 - 1) * dice.w, y: -(Math.random() * 2 - 1) * dice.h };
+      const vector = { x: (Math.random() * 4 - 1) * dice.w, y: -(Math.random() * 4 - 1) * dice.h };
       const dist = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
-      const boost = (Math.random() + 3) * dist;
+      const boost = (Math.random() + 4) * dist;
       const beforeRoll = (_) => {
         $(".btn-roll-value").empty();
       };
