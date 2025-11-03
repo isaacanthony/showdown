@@ -2,17 +2,18 @@
 // https://www.showdownbot.com/
 // https://www.sportslogos.net/leagues/list_by_sport/2/Baseball-Logos
 let data = {};
+let myTeam = {};
 let dice;
 let isRolling = false;
 
 async function init() {
     data = await (await fetch("data.json")).json();
-    console.log(data);
     // nav("dice", () => {
     //     dice = new DICE.dice_box(document.querySelector("#dice-container"));
     //     dice.setDice("1d20");
     // });
     nav("landing");
+    // nav("select-lineup", () => setTeam("NL", "LAD"));
 }
 
 function nav(page, callback = () => {}) {
@@ -36,10 +37,10 @@ function joinGame() {
     // TODO: Create connection to opponent.
     const gameId = $("#game-id").val();
     console.log(`Joining ${gameId}...`);
-    nav("select-team", () => setLeague('AL'));
+    nav("select-team", () => showTeams('AL'));
 }
 
-function setLeague(league) {
+function showTeams(league) {
     const teams = data.teams[league].map((team) => {
         return `
             <div 
@@ -53,7 +54,24 @@ function setLeague(league) {
 }
 
 function setTeam(league, team) {
-    console.log(league, team);
+    myTeam = {
+        league,
+        team,
+        players: data.cards["2025"][league][team],
+    };
+    showLineup("lineup");
+}
+
+function showLineup(position) {
+    const cards = myTeam.players[position].map((card) => {
+        return `
+            <img
+                src="imgs/cards/2025/${myTeam.league}/${myTeam.team}/${card}.png"
+                class="d-inline-block vh-60 mx-3 br-4 cursor-pointer"
+            >
+        `;
+    });
+    $("#select-lineup-scroll").html(cards);
 }
 
 function rollDice() {
