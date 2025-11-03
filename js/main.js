@@ -42,11 +42,11 @@ function joinGame() {
 function setLeague(league) {
     const teams = data.teams[league].map((team) => {
         return `
-            <img
-                src="imgs/teams/${league}/${team}.png"
-                class="d-inline-block vh-40 w-auto px-5 cursor-pointer"
+            <div 
+                class="d-inline-block vh-40 w-50 mx-5 br-4 bg-light bg-url cursor-pointer"
+                style="background-image: url('imgs/teams/${league}/${team}.png')"
                 onclick="nav('select-lineup', () => setTeam('${league}', '${team}'))"
-            >
+            ></div>
         `;
     });
     $("#select-team-scroll").html(teams);
