@@ -33,15 +33,15 @@ const DICE = (function() {
         material_options: {
             specular: 0x172022,
             color: 0xf0f0f0,
-            shininess: 40,
+            shininess: 10,
             shading: THREE.FlatShading,
         },
         label_color: '#aaaaaa', //numbers on dice
         dice_color: '#202020',
         ambient_light_color: 0xf0f0f0,
         spot_light_color: 0xefefef,
-        desk_color: '#000000', //canvas background
-        desk_opacity: 1.0,
+        desk_color: '#343a40', //canvas background
+        desk_opacity: 0.1,
         use_shadows: true,
         use_adapvite_timestep: true //todo: setting this to false improves performace a lot. but the dice rolls don't look as natural...
 

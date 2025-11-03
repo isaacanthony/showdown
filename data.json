@@ -1,4 +1,40 @@
 {
+    "teams": {
+        "AL": [
+            "BAL",
+            "BOS",
+            "CLE",
+            "CWS",
+            "DET",
+            "HOU",
+            "KC",
+            "LAA",
+            "MIN",
+            "NYY",
+            "OAK",
+            "SEA",
+            "TB",
+            "TEX",
+            "TOR"
+        ],
+        "NL": [
+            "ATL",
+            "AZ",
+            "CHC",
+            "CIN",
+            "COL",
+            "LAD",
+            "MIA",
+            "MIL",
+            "NYM",
+            "PHI",
+            "PIT",
+            "SD",
+            "SF",
+            "STL",
+            "WAS"
+        ]
+    },
     "cards": {
         "2025": {
             "LAD": {
