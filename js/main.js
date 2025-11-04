@@ -16,6 +16,10 @@ async function init() {
     // nav("select-lineup", () => setTeam("NL", "LAD"));
 }
 
+function reset() {
+    myTeam = {};
+}
+
 function nav(page, callback = () => {}) {
     $("#container").load(`html/${page}.html`, callback);
 }
