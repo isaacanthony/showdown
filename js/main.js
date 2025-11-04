@@ -41,6 +41,11 @@ function joinGame() {
 }
 
 function showTeams(league) {
+    if (myTeam.team) {
+        $("#next-to-select-lineup").removeClass("d-none");
+    } else {
+        $("#next-to-select-lineup").addClass("d-none");
+    }
     const teams = data.teams[league].map((team) => {
         return `
             <div 

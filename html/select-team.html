@@ -1,8 +1,22 @@
-<div class="row vh-10"></div>
+<div class="row vh-10 pt-4">
+    <div class="col-6">
+        <a href="#" class="lead" onclick="nav('landing')">&leftarrow; Back</a>
+    </div>
+    <div class="col-6 text-right">
+        <a
+            id="next-to-select-lineup"
+            href="#"
+            class="lead"
+            onclick="nav('select-lineup', () => showLineup('lineup'))"
+        >
+            Next &rightarrow;
+        </a>
+    </div>
+</div>
 
 <div class="row vh-10">
     <div class="col-12 text-center">
-        <h1 class="text-light">Select team</h1>
+        <h2 class="text-light">Select team</h2>
     </div>
 </div>
 
