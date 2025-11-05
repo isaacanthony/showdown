@@ -21,7 +21,7 @@ function reset() {
 }
 
 function nav(page, callback = () => {}) {
-    $("#container").load(`html/${page}.html`, callback);
+    $("#wrapper").load(`html/${page}.html`, callback);
 }
 
 function startGame() {
@@ -78,15 +78,31 @@ function showLineup(position) {
             <img
                 src="${imgUrl}"
                 class="d-inline-block vh-70 mx-3 br-4 cursor-pointer"
-                onclick="nav('view-player', () => fullScreen('${imgUrl}'))"
+                onclick="nav('view-player', () => fullScreen('${imgUrl}', false))"
             >
         `;
     });
     $("#select-lineup-scroll").html(cards);
 }
 
-function fullScreen(imgUrl) {
-    $("#full-screen-player").html(`<img src="${imgUrl}" class="vh-80 br-4">`);
+function fullScreen(imgUrl, isFlipped) {
+    $("#full-screen-player").html(`
+        <img
+            src="${imgUrl}"
+            class="vh-80 br-4 cursor-pointer animate__animated ${isFlipped ? 'animate__flipInY animate__fast' : 'animate__zoomIn animate__faster'}"
+            onclick="fullScreenBack('${imgUrl}')"
+        >
+    `);
+}
+
+function fullScreenBack(imgUrl) {
+    $("#full-screen-player").html(`
+        <img
+            src="imgs/card-back-portrait.png"
+            class="vh-80 br-4 cursor-pointer animate__animated animate__flipInY animate__fast"
+            onclick="fullScreen('${imgUrl}', true)"
+        >
+    `);
 }
 
 function rollDice() {
