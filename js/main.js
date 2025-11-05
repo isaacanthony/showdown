@@ -53,7 +53,7 @@ function showTeams(league) {
     const teams = data.teams[league].map((team) => {
         return `
             <div 
-                class="d-inline-block vh-40 w-50 mx-5 br-4 bg-light bg-url cursor-pointer"
+                class="d-inline-block vh-40 w-50 mx-3 br-4 bg-light bg-url cursor-pointer"
                 style="background-image: url('imgs/teams/${league}/${team}.png')"
                 onclick="nav('select-lineup', () => setTeam('${league}', '${team}'))"
             ></div>
@@ -73,14 +73,20 @@ function setTeam(league, team) {
 
 function showLineup(position) {
     const cards = myTeam.players[position].map((card) => {
+        const imgUrl = `imgs/cards/2025/${myTeam.league}/${myTeam.team}/${card}.png`;
         return `
             <img
-                src="imgs/cards/2025/${myTeam.league}/${myTeam.team}/${card}.png"
-                class="d-inline-block vh-60 mx-3 br-4 cursor-pointer"
+                src="${imgUrl}"
+                class="d-inline-block vh-70 mx-3 br-4 cursor-pointer"
+                onclick="nav('view-player', () => fullScreen('${imgUrl}'))"
             >
         `;
     });
     $("#select-lineup-scroll").html(cards);
+}
+
+function fullScreen(imgUrl) {
+    $("#full-screen-player").html(`<img src="${imgUrl}" class="vh-80 br-4">`);
 }
 
 function rollDice() {
@@ -98,3 +104,9 @@ function rollDice() {
     };
     dice.throw_dices(vector, boost, dist, beforeRoll, afterRoll);
 }
+
+const calculateScore = (team) => {
+    let score = 0;
+    $(`.select-score-${team}`).each((_, el) => score += Number($(el).val()));
+    $(`.score-${team}`).text(score);
+};

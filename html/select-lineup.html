@@ -1,4 +1,4 @@
-<div class="row vh-10 pt-4">
+<div class="row vh-8 pt-4">
     <div class="col-6">
         <a href="#" class="lead" onclick="nav('select-team', () => showTeams('AL'))">&leftarrow; Back</a>
     </div>
@@ -8,24 +8,21 @@
     </div>
 </div>
 
-<div class="row vh-10">
+<div class="row vh-8">
     <div class="col-12 text-center">
-        <h1 class="text-light">Select lineup</h1>
+        <h2 class="text-light">Set lineup</h2>
     </div>
 </div>
 
 <div class="row vh-10">
-    <div class="col-4 text-center">
-        <button class="btn btn-light" onclick="showLineup('pitchers')">Pitchers</button>
+    <div class="col-6 text-center">
+        <button class="btn btn-light w-75" onclick="showLineup('lineup')">Lineup</button>
     </div>
-    <div class="col-4 text-center">
-        <button class="btn btn-light" onclick="showLineup('lineup')">Lineup</button>
-    </div>
-    <div class="col-4 text-center">
-        <button class="btn btn-light" onclick="showLineup('bench')">Bench</button>
+    <div class="col-6 text-center">
+        <button class="btn btn-light w-75" onclick="showLineup('pitchers')">Pitchers</button>
     </div>
 </div>
 
-<div class="row mt-2 vh-60">
+<div class="row vh-70">
     <div id="select-lineup-scroll" class="col-12 text-nowrap overflow-x-scroll"></div>
 </div>
