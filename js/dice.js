@@ -41,7 +41,7 @@ const DICE = (function() {
         ambient_light_color: 0xf0f0f0,
         spot_light_color: 0xefefef,
         desk_color: '#343a40', //canvas background
-        desk_opacity: 0.1,
+        desk_opacity: 0,
         use_shadows: true,
         use_adapvite_timestep: true //todo: setting this to false improves performace a lot. but the dice rolls don't look as natural...
 
@@ -144,7 +144,7 @@ const DICE = (function() {
         this.w = this.cw;
         this.h = this.ch;
         this.aspect = Math.min(this.cw / this.w, this.ch / this.h);
-        vars.scale = Math.sqrt(this.w * this.w + this.h * this.h) / 8;
+        vars.scale = Math.sqrt(this.w * this.w + this.h * this.h) / 20;
         //console.log('scale = ' + vars.scale);
 
         this.renderer.setSize(this.cw * 2, this.ch * 2);
