@@ -21,15 +21,16 @@
         }
         .card {
             position: absolute;
-            height: 100px;
-            width: 72px;
+            height: 150px;
+            width: 100px;
             border-radius: 3px;
             cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0);
         }
         .card-container {
             position: absolute;
-            height: 100px;
-            width: 72px;
+            height: 150px;
+            width: 100px;
             border-radius: 3px;
             z-index: -1;
         }
@@ -49,8 +50,8 @@
         async function init() {
             const data = await (await fetch("data.json")).json();
 
-            let x = 450;
-            let y = 900;
+            let x = 850;
+            let y = 1550;
 
             data.cards["2025"]["1B"].forEach((card) => {
                 $("body").append(`
@@ -61,11 +62,11 @@
                         style="top: ${y}px; left: ${x}px;"
                     >
                 `);
-                x += 82;
+                x += 120;
             });
 
             $(".card").draggable({ snap: ".card-container", snapMode: "inner" });
-            window.scrollTo(600, 100);
+            window.scrollTo(600, 400);
         }
         
         $(document).ready(init);
