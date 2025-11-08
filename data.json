@@ -1,99 +1,20 @@
 {
-    "teams": {
-        "AL": [
-            "BAL",
-            "BOS",
-            "CLE",
-            "CWS",
-            "DET",
-            "HOU",
-            "KC",
-            "LAA",
-            "MIN",
-            "NYY",
-            "OAK",
-            "SEA",
-            "TB",
-            "TEX",
-            "TOR"
-        ],
-        "NL": [
-            "ATL",
-            "AZ",
-            "CHC",
-            "CIN",
-            "COL",
-            "LAD",
-            "MIA",
-            "MIL",
-            "NYM",
-            "PHI",
-            "PIT",
-            "SD",
-            "SF",
-            "STL",
-            "WAS"
-        ]
-    },
     "cards": {
         "2025": {
-            "AL": {},
-            "NL": {
-                "LAD": {
-                    "all": [
-                        "abanda",
-                        "acall",
-                        "apages",
-                        "avesia",
-                        "brortvedt",
-                        "bsnell",
-                        "btreinen",
-                        "ckershaw",
-                        "ffreeman",
-                        "hkim",
-                        "khernandez",
-                        "mbetts",
-                        "mmuncy",
-                        "mrojas",
-                        "rsasaki",
-                        "sohtani0",
-                        "sohtani1",
-                        "tedman",
-                        "tglasnow",
-                        "thernandez",
-                        "wsmith",
-                        "yyamamoto"
-                    ],
-                    "pitchers": [
-                        "bsnell",
-                        "ckershaw",
-                        "rsasaki",
-                        "sohtani1",
-                        "tglasnow",
-                        "yyamamoto",
-                        "abanda",
-                        "avesia",
-                        "btreinen"
-                    ],
-                    "lineup": [
-                        "sohtani0",
-                        "mbetts",
-                        "wsmith",
-                        "ffreeman",
-                        "tedman",
-                        "thernandez",
-                        "mmuncy",
-                        "khernandez",
-                        "apages"
-                    ],
-                    "bench": [
-                        "acall",
-                        "brortvedt",
-                        "hkim",
-                        "mrojas"
-                    ]
-                }
-            }
+            "1B": [
+                "alonso",
+                "aranda",
+                "bellinger",
+                "diaz",
+                "freeman",
+                "gonzalez",
+                "guerrero",
+                "kurtz",
+                "naylor",
+                "olson",
+                "rice",
+                "soderstrom"
+            ]
         }
     }
 }

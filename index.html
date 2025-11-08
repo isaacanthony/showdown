@@ -1,27 +1,69 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Showdown</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚾</text></svg>">
-    <!-- css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <title>MLB Showdown</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100wh;
+            overflow: scroll;
+        }
+        #bg-field {
+            position: absolute;
+            border-bottom: 300px solid black;
+            border-left: 50px solid black;
+            border-right: 50px solid black;
+            z-index: -2; 
+        }
+        .card {
+            position: absolute;
+            height: 100px;
+            width: 72px;
+            border: 1px solid black;
+            border-radius: 3px;
+        }
+        .card-container {
+            position: absolute;
+            height: 100px;
+            width: 72px;
+            border-radius: 3px;
+            z-index: -1;
+        }
+        .border-white { border: 1px solid white; }
+        .pitcher { left: 833px; top: 525px; }
+        .batter { left: 833px; top: 740px; }
+    </style>
 </head>
-<body class="vh-100 w-100 bg-dark">
-    <div id="container" class="container-fluid vh-100 w-100 overflow-y-hidden">
-        <div id="wrapper" class="vh-100 w-100"></div>
-    </div>
+<body>
+    <img id="bg-field" src="imgs/field.jpg">
+
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="js/three.min.js"></script>
-    <script src="js/cannon.min.js"></script>
-    <script src="js/teal.js"></script>
-    <script src="js/dice.js"></script>
-    <script src="js/main.js"></script>
-    <script>$(document).ready(init);</script>
+    <script>
+        async function init() {
+            const data = await (await fetch("data.json")).json();
+
+            let x = 450;
+            let y = 900;
+
+            data.cards["2025"]["1B"].forEach((card) => {
+                $("body").append(`
+                    <div class="card-container border-white" style="top: ${y}px; left: ${x}px;"></div>
+                    <img
+                        src="imgs/cards/2025/1B/${card}.png"
+                        class="card"
+                        style="top: ${y}px; left: ${x}px;"
+                    >
+                `);
+                x += 82;
+            });
+
+            $(".card").draggable({ snap: ".card-container", snapMode: "inner" });
+            window.scrollTo(600, 100);
+        }
+        
+        $(document).ready(init);
+    </script>
 </body>
