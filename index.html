@@ -17,13 +17,13 @@
             border-bottom: 300px solid black;
             border-left: 50px solid black;
             border-right: 50px solid black;
-            z-index: -2; 
+            z-index: 0;
         }
         #dice-container {
             position: absolute;
             height: 1800px;
             width: 3100px;
-            z-index: 1;
+            z-index: 2;
         }
         .card {
             position: absolute;
@@ -32,23 +32,32 @@
             border-radius: 3px;
             cursor: pointer;
             border: 1px solid rgba(0, 0, 0, 0);
-            z-index: 0;
+            z-index: 4;
         }
         .card-container {
             position: absolute;
             height: 150px;
             width: 100px;
             border-radius: 3px;
-            z-index: -1;
+            z-index: 1;
         }
         .border-white { border: 1px solid white; }
-        .pitcher { left: 833px; top: 525px; }
-        .batter { left: 833px; top: 740px; }
+        #btn-roll {
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            top: 1150px;
+            left: 1515px;
+            font-size: 100%;
+            z-index: 3;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <img id="bg-field" src="imgs/field.jpg">
     <div id="dice-container"></div>
+    <button id="btn-roll" onclick="roll()">Roll<span id="roll-result"></span></button>
 
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -61,6 +70,25 @@
     <script src="js/dice.js"></script>
 
     <script>
+        let dice;
+        let isRolling = false;
+
+        function roll() {
+            if (isRolling) return;
+            isRolling = true;
+            const vector = { x: (Math.random() * 3 - 1) * dice.w, y: -(Math.random() * 3 - 1) * dice.h };
+            const dist = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+            const boost = (Math.random() + 2) * dist;
+            const beforeRoll = (_) => {
+                $("#roll-result").empty()
+            };
+            const afterRoll = (notation) => {
+                $("#roll-result").html(`: ${notation.resultString}`);
+                isRolling = false;
+            };
+            dice.throw_dices(vector, boost, dist, beforeRoll, afterRoll);
+        }
+
         async function init() {
             const data = await (await fetch("data.json")).json();
 
@@ -82,10 +110,8 @@
             $(".card").draggable({ snap: ".card-container", snapMode: "inner" });
             window.scrollTo(600, 400);
 
-            const dice = new DICE.dice_box(document.querySelector("#dice-container"));
+            dice = new DICE.dice_box(document.querySelector("#dice-container"));
             dice.setDice("1d20");
-            dice.bind_swipe(document.querySelector("#dice-container"), () => {}, () => {});
-            dice.start_throw();
         }
         
         $(document).ready(init);
