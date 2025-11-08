@@ -22,6 +22,7 @@
             width: 72px;
             border: 1px solid black;
             border-radius: 3px;
+            cursor: pointer;
         }
         .card-container {
             position: absolute;
@@ -41,6 +42,7 @@
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script>
         async function init() {
             const data = await (await fetch("data.json")).json();
