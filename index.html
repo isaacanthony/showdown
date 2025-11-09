@@ -56,25 +56,18 @@
         .scoreboard {
             position: absolute;
             top: 242px;
-        }
-        .scoreboard-score {
-            width: 45px;
-            height: 45px;
-            font-size: 20px;
-            border-radius: 5px;
+            width: 75px;
+            height: 50px;
+            font-size: 100%;
         }
         #scoreboard-home {
-            left: 1413px;
+            left: 1396px;
         }
         #scoreboard-away {
-            left: 1557px;
+            left: 1552px;
         }
         #scoreboard-inning {
-            width: 45px;
-            height: 50px;
-            font-size: 20px;
-            border-radius: 5px;
-            left: 1485px;
+            left: 1475px;
         }
     </style>
 </head>
@@ -82,20 +75,9 @@
     <img id="bg-field" src="imgs/field.jpg">
     <div id="dice-container"></div>
     <button id="btn-roll" onclick="roll()">Roll<span id="roll-result"></span></button>
-    <input type="number" id="scoreboard-home" class="scoreboard scoreboard-score" min="0" max="99" step="1" value="0">
-    <input type="number" id="scoreboard-away" class="scoreboard scoreboard-score" min="0" max="99" step="1" value="0">
-
-    <select id="scoreboard-inning" class="scoreboard">
-        <option selected>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-        <option>8</option>
-        <option>9</option>
-    </select>
+    <select id="scoreboard-inning" class="scoreboard"></select>
+    <select id="scoreboard-home" class="scoreboard scoreboard-score"></select>
+    <select id="scoreboard-away" class="scoreboard scoreboard-score"></select>
 
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -144,6 +126,17 @@
                 `);
                 x += 190;
             });
+
+            const inningOptions = Array.from({ length: 9 }, (_, index) => {
+                return `<option ${index === 0 ? "selected" : ""}>${index + 1}</option>`;
+            }).join("");
+            $("#scoreboard-inning").html(inningOptions);
+
+            const scoreOptions = Array.from({ length: 51 }, (_, index) => {
+                return `<option ${index === 0 ? "selected" : ""}>${index}</option>`;
+            }).join("");
+            $("#scoreboard-home").html(scoreOptions);
+            $("#scoreboard-away").html(scoreOptions);
 
             $(".card").draggable({ snap: ".card-container", snapMode: "inner" });
             dice = new DICE.dice_box(document.querySelector("#dice-container"));
