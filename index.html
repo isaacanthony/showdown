@@ -141,7 +141,7 @@
             $(".card").draggable({ snap: ".card-container", snapMode: "inner" });
             dice = new DICE.dice_box(document.querySelector("#dice-container"));
             dice.setDice("1d20");
-            window.scrollTo(1000, 600);
+            window.scrollTo(1200, 600, { behavior: "instant" });
         }
         
         $(document).ready(init);
