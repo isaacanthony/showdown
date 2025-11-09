@@ -19,12 +19,12 @@
         }
         #dice-container {
             position: absolute;
-            height: 700px;
-            width: 600px;
-            top: 600px;
-            left: 1220px;
+            height: 1050px;
+            width: 1225px;
+            top: 350px;
+            left: 900px;
             z-index: 2;
-            /* border: 1px solid black; */
+            /* border: 1px solid white; */
         }
         .card {
             position: absolute;
@@ -39,15 +39,15 @@
             position: absolute;
             height: 240px;
             width: 160px;
+            border: 1px solid white;
             border-radius: 5px;
             z-index: 1;
         }
-        .border-white { border: 1px solid white; }
         #btn-roll {
             position: absolute;
             width: 100px;
             height: 50px;
-            top: 1350px;
+            top: 1425px;
             left: 1464px;
             font-size: 100%;
             z-index: 4;
@@ -117,7 +117,7 @@
 
             data.cards["2025"]["1B"].forEach((card) => {
                 $("body").append(`
-                    <div class="card-container border-white" style="top: ${y}px; left: ${x}px;"></div>
+                    <div class="card-container" style="top: ${y}px; left: ${x}px;"></div>
                     <img
                         src="imgs/cards/2025/1B/${card}.png"
                         class="card"
