@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MLB Showdown</title>
-    <style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚾</text></svg>">
+      <style>
         body {
             margin: 0;
             height: 100vh;
@@ -141,7 +143,7 @@
             $(".card").draggable({ snap: ".card-container", snapMode: "inner" });
             dice = new DICE.dice_box(document.querySelector("#dice-container"));
             dice.setDice("1d20");
-            window.scrollTo(1200, 600, { behavior: "instant" });
+            window.scrollTo({ top: 600, left: 1150, behavior: "smooth" });
         }
         
         $(document).ready(init);
