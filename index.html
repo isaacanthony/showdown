@@ -15,15 +15,18 @@
             position: absolute;
             height: 1500px;
             width: 3000px;
-            border-bottom: 500px solid black;
+            background-image: url('imgs/field.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-bottom: 800px solid black;
             z-index: 0;
         }
         #dice-container {
             position: absolute;
-            height: 1070px;
-            width: 1225px;
-            top: 350px;
-            left: 900px;
+            height: 725px;
+            width: 1000px;
+            top: 1575px;
+            left: 1000px;
             z-index: 2;
             /* border: 1px solid white; */
         }
@@ -48,7 +51,7 @@
             position: absolute;
             width: 100px;
             height: 50px;
-            top: 1435px;
+            top: 1515px;
             left: 1464px;
             font-size: 100%;
             z-index: 4;
@@ -56,29 +59,68 @@
         }
         .scoreboard {
             position: absolute;
-            top: 242px;
+            top: 257px;
             width: 60px;
             height: 50px;
             font-size: 100%;
         }
-        #scoreboard-home {
-            left: 1410px;
-        }
-        #scoreboard-away {
-            left: 1552px;
-        }
-        #scoreboard-inning {
-            left: 1480px;
-        }
+        #scoreboard-home { left: 1410px; }
+        #scoreboard-away { left: 1552px; }
+        #scoreboard-inning { left: 1480px; }
+        .pitcher { top: 1200px; }
+        .batter-row0 { top: 1500px; }
+        .batter-row1 { top: 1800px; }
+        .card-l0 { left: 10px; }
+        .card-l1 { left: 200px; }
+        .card-l2 { left: 390px; }
+        .card-l3 { left: 580px; }
+        .card-l4 { left: 770px; }
+        .card-r0 { left: 2050px; }
+        .card-r1 { left: 2240px; }
+        .card-r2 { left: 2430px; }
+        .card-r3 { left: 2620px; }
+        .card-r4 { left: 2810px; }
     </style>
 </head>
 <body>
-    <img id="bg-field" src="imgs/field.jpg">
+    <div id="bg-field"></div>
+
     <div id="dice-container"></div>
     <button id="btn-roll" onclick="roll()">Roll<span id="roll-result"></span></button>
+
     <select id="scoreboard-inning" class="scoreboard"></select>
     <select id="scoreboard-home" class="scoreboard scoreboard-score"></select>
     <select id="scoreboard-away" class="scoreboard scoreboard-score"></select>
+
+    <div class="card-container pitcher card-l0"></div>
+    <div class="card-container pitcher card-l1"></div>
+    <div class="card-container pitcher card-l2"></div>
+    <div class="card-container pitcher card-l3"></div>
+
+    <div class="card-container pitcher card-r1"></div>
+    <div class="card-container pitcher card-r2"></div>
+    <div class="card-container pitcher card-r3"></div>
+    <div class="card-container pitcher card-r4"></div>
+
+    <div class="card-container batter-row0 card-l0"></div>
+    <div class="card-container batter-row0 card-l1"></div>
+    <div class="card-container batter-row0 card-l2"></div>
+    <div class="card-container batter-row0 card-l3"></div>
+    <div class="card-container batter-row1 card-l0"></div>
+    <div class="card-container batter-row1 card-l1"></div>
+    <div class="card-container batter-row1 card-l2"></div>
+    <div class="card-container batter-row1 card-l3"></div>
+    <div class="card-container batter-row1 card-l4"></div>
+
+    <div class="card-container batter-row0 card-r1"></div>
+    <div class="card-container batter-row0 card-r2"></div>
+    <div class="card-container batter-row0 card-r3"></div>
+    <div class="card-container batter-row0 card-r4"></div>
+    <div class="card-container batter-row1 card-r0"></div>
+    <div class="card-container batter-row1 card-r1"></div>
+    <div class="card-container batter-row1 card-r2"></div>
+    <div class="card-container batter-row1 card-r3"></div>
+    <div class="card-container batter-row1 card-r4"></div>
 
     <!-- js -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -110,23 +152,53 @@
             dice.throw_dices(vector, boost, dist, beforeRoll, afterRoll);
         }
 
+        function initRandomCards(cards) {
+            const results = [];
+            const chosen = new Set([]);
+
+            const choose = (pos, cls) => {
+                const choice = pos + "/" + cards[pos][Math.floor(Math.random() * cards[pos].length)];
+                if (chosen.has(choice)) {
+                    return choose(pos, cls);
+                }
+                chosen.add(choice);
+                return `<img src="imgs/cards/2025/${choice}.png" class="${cls}">`
+            };
+
+            results.push(choose("SP", "card pitcher card-l0"));
+            // results.push(choose("RP", "card pitcher card-l1"));
+            // results.push(choose("RP", "card pitcher card-l2"));
+            // results.push(choose("CP", "card pitcher card-l3"));
+            results.push(choose("1B", "card batter-row0 card-l0"));
+            results.push(choose("2B", "card batter-row0 card-l1"));
+            results.push(choose("3B", "card batter-row0 card-l2"));
+            results.push(choose("CA", "card batter-row0 card-l3"));
+            results.push(choose("CF", "card batter-row1 card-l0"));
+            // results.push(choose("DH", "card batter-row1 card-l1"));
+            results.push(choose("LRF", "card batter-row1 card-l2"));
+            results.push(choose("LRF", "card batter-row1 card-l3"));
+            results.push(choose("SS", "card batter-row1 card-l4"));
+
+            results.push(choose("SP", "card pitcher card-r1"));
+            // results.push(choose("RP", "card pitcher card-r2"));
+            // results.push(choose("RP", "card pitcher card-r3"));
+            // results.push(choose("CP", "card pitcher card-r4"));
+            results.push(choose("1B", "card batter-row0 card-r1"));
+            results.push(choose("2B", "card batter-row0 card-r2"));
+            results.push(choose("3B", "card batter-row0 card-r3"));
+            results.push(choose("CA", "card batter-row0 card-r4"));
+            results.push(choose("CF", "card batter-row1 card-r0"));
+            // results.push(choose("DH", "card batter-row1 card-r1"));
+            results.push(choose("LRF", "card batter-row1 card-r2"));
+            results.push(choose("LRF", "card batter-row1 card-r3"));
+            results.push(choose("SS", "card batter-row1 card-r4"));
+
+            $("body").append(results.join(""));
+        }
+
         async function init() {
             const data = await (await fetch("data.json")).json();
-
-            let x = 500;
-            let y = 1550;
-
-            data.cards["2025"]["1B"].forEach((card) => {
-                $("body").append(`
-                    <div class="card-container" style="top: ${y}px; left: ${x}px;"></div>
-                    <img
-                        src="imgs/cards/2025/1B/${card}.png"
-                        class="card"
-                        style="top: ${y}px; left: ${x}px;"
-                    >
-                `);
-                x += 190;
-            });
+            initRandomCards(data.cards["2025"]);
 
             const inningOptions = Array.from({ length: 9 }, (_, index) => {
                 return `<option ${index === 0 ? "selected" : ""}>${index + 1}</option>`;
